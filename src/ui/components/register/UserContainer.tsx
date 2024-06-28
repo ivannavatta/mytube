@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import UserService from '../../external/services/user.service';
-import CreateUserUseCase from '../../useCases/user.useCase';
+import UserService from '../../../external/services/user.service';
+import CreateUserUseCase from '../../../useCases/createUser.useCase';
 import UserDetails from './UserDetails';
-import { User } from '../../domain/entities/user.entity';
+import { User } from '../../../domain/entities/user.entity';
 
 
 const UserContainer: React.FC = () => {

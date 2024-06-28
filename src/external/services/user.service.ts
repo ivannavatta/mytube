@@ -1,5 +1,4 @@
-
-import { User } from "../../domain/entities/user.entity"
+import { Login, User } from "../../domain/entities/user.entity"
 import { isValidUser } from "../../shared/utils/validUser.util"
 
 export default class UserService {
@@ -38,6 +37,31 @@ export default class UserService {
             
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    async login(user: Login) {
+        const fetchParams = {
+            method: 'POST',
+            url: `${this.baseUrl}/auth`,
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(user)
+        }
+        try {
+            const res = await fetch(fetchParams.url, {
+                method: fetchParams.method,
+                headers: fetchParams.headers,
+                body: fetchParams.body
+            })
+
+            const data = await res.json()
+            console.log("🚀 ~ UserService ~ login ~ data:", data)
+            
+        } catch (error) {
+            console.log(error);
+            
         }
     }
 }

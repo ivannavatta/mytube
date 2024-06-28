@@ -1,6 +1,6 @@
 import { User } from "../domain/entities/user.entity";
 import UserService from "../external/services/user.service";
-import { CreateUser } from "./interfaces/createUser.interface";
+import { CreateUser } from "./interfaces/user.interface";
 
 export default class CreateUserUseCase implements CreateUser {
     private userService: UserService
