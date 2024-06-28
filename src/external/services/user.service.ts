@@ -1,4 +1,6 @@
-import User from "../../domain/entities/user.entity"
+
+import { User } from "../../domain/entities/user.entity"
+import { isValidUser } from "../../shared/utils/validUser.util"
 
 export default class UserService {
     private baseUrl: string
@@ -22,8 +24,18 @@ export default class UserService {
                 body: fetchParams.body
             })
 
-            const data = res.json()
-            console.log("🚀 ~ UserService ~ register ~ data:", data)
+            const data = await res.json()
+
+            const user = data.payload
+            
+            if(isValidUser(user)){
+            console.log(`User Name: ${user.firstName}`);
+            console.log(`User Email: ${user.email}`);
+            }
+            else{
+                throw new Error('Invalid user data')
+            }
+            
         } catch (error) {
             console.log(error);
         }
