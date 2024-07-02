@@ -10,10 +10,7 @@ const LoginContainer: React.FC = () => {
     
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        const login: Login = {
-            email: email,
-            password: password
-        }
+        const login = new Login(email, password)
         const userService = new UserService('http://localhost:3001')
         const loginUseCase = new LoginUserUseCase(userService)
     
