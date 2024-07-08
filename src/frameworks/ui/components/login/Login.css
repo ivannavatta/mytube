@@ -1,0 +1,5 @@
+.form-group .span::after {
+    content: '*';
+    color: red;
+    margin-left: 2px;
+}
