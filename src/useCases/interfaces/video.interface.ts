@@ -1,6 +1,13 @@
-import { Video } from "../../domain/entities/video.entity";
+import { IVideo } from "../../controllers/interfaces/interfaces";
 
 export interface CreateVideo {
-    // execute(video: Video): Promise<void>
     execute(video: any): Promise<void>
+}
+
+export interface GetVideos {
+    execute(): Promise<IVideo[]>
+}
+
+export interface GetUserVideos {
+    execute(email: string): Promise<IVideo[]>
 }

@@ -1,4 +1,4 @@
-import { Login } from "../domain/entities/user.entity";
+import { Login } from "../controllers/interfaces/interfaces";
 import UserService from "../external/services/user.service";
 import { LoginUser } from "./interfaces/user.interface";
 
