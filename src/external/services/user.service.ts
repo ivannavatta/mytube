@@ -1,4 +1,5 @@
-import { Login, User } from "../../domain/entities/user.entity"
+import { Login } from "../../controllers/interfaces/interfaces"
+import { User } from "../../domain/entities/user.entity"
 import { isValidUser } from "../../shared/utils/validUser.util"
 
 export default class UserService {

@@ -1,3 +1,4 @@
+import { IVideo } from "../../controllers/interfaces/interfaces"
 import { Video } from "../../domain/entities/video.entity"
 
 export default class VideoService {
@@ -6,38 +7,50 @@ export default class VideoService {
         this.baseUrl = baseUrl
     }
 
-    // async create(video: Video): Promise<void>{
-    //     const fetchParams = {
-    //         url: `${this.baseUrl}/video`,
-    //         headers: {
-    //             'Content-type': 'multipart/form-data',
-    //         },
-    //         method: 'POST',
-    //         body: JSON.stringify(video),
-    //     }
-    //     try {
-    //         const res = await fetch(fetchParams.url, {
-    //             method: fetchParams.method,
-    //             headers: fetchParams.headers,
-    //             body: fetchParams.body
-    //         })
+    async getAll(): Promise<IVideo[]> {
+        try {
+            const res = await fetch(`${this.baseUrl}/video/public`)
 
-    //         const data = await res.json()
+            const data = await res.json()
 
-    //         const video = data.payload
+            const response = data.payload as IVideo[]
+            console.log("🚀 ~ VideoService ~ getAll ~ response:", response)
+
+            return response
             
-    //         // if(isValidUser(video)){
-    //         // console.log(`User Name: ${video.firstName}`);
-    //         // console.log(`User Email: ${video.email}`);
-    //         // }
-    //         // else{
-    //         //     throw new Error('Invalid user data')
-    //         // }
-            
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+        } catch (error) {
+            console.log(error);
+            return []
+        }
+    }
+
+    async getUserVideos(email: string): Promise<IVideo[]> {
+        const fetchParams = {
+            url: `${this.baseUrl}/video/channel`,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({email}),
+        }
+        try {
+            const res = await fetch(fetchParams.url, {
+                method: fetchParams.method,
+                headers: fetchParams.headers,
+                body: fetchParams.body
+            })
+
+            const data = await res.json()
+
+            const info = data.payload as IVideo[]
+            console.log("🚀 ~ VideoService ~ getUserVideos ~ info:", info)
+
+            return info
+        } catch (error) {
+            console.log(error);
+            return []
+        }
+    }
 
     async create(video: any): Promise<void>{
         const fetchParams = {
@@ -58,14 +71,6 @@ export default class VideoService {
             const data = await res.json()
 
             const video = data.payload
-            
-            // if(isValidUser(video)){
-            // console.log(`User Name: ${video.firstName}`);
-            // console.log(`User Email: ${video.email}`);
-            // }
-            // else{
-            //     throw new Error('Invalid user data')
-            // }
             
         } catch (error) {
             console.log(error);
