@@ -1,0 +1,40 @@
+.userVideo-container {
+    margin-left: 260px;
+    margin-top: 50px;
+    color: white;
+}
+
+.video-table {
+    width: 90%;
+    border-collapse: collapse;
+}
+
+.video-table th, .video-table td {
+    border-bottom: 1px solid white;
+    padding: 8px;
+    text-align: left;
+}
+
+.video-table th {
+    background-color: #333;
+}
+
+.video-table td a {
+    color: white;
+    text-decoration: none;
+}
+
+.messageChannel {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+
