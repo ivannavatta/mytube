@@ -1,14 +1,16 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import VideoContainer from '../components/createVideo/VideoContainer';
+import { UserContext } from '../../../domain/context/userContext.context';
 
+const VideoPage: React.FC = () => {
+  const context = useContext(UserContext)
 
-interface VIdeoPageProps {
-  email: string
-}
+  if(!context) throw new Error('no existe el contexto')
 
-const VideoPage: React.FC<VIdeoPageProps> = ({ email }) => {
+  const { email } = context
+
   const [show, setShow] = useState(true);
   const navigate = useNavigate();
 

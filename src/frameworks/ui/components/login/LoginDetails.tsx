@@ -37,8 +37,12 @@ const LoginDetails: React.FC<LoginDetailsProps> = ({
       handleChangeInput: setPassword
     }
   ]
+
+  const handleClick = () =>{
+    localStorage.setItem('userEmail', email);
+  }
   return (
-    <Modal titleLabel='Log in' submitButtonLabel='Log in' handleClose={handleClose} handleSubmit={handleSubmit} fields={fields}>
+    <Modal titleLabel='Log in' submitButtonLabel='Log in' handleClose={handleClose} handleSubmit={handleSubmit} fields={fields} click={handleClick}>
       You do not have an account? <Link to={'/signup'}>Sign up</Link> 
     </Modal>
   )

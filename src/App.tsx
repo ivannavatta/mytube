@@ -8,35 +8,31 @@ import Sidebar from './frameworks/ui/components/Sidebar/Sidebar';
 import LoginPage from './frameworks/ui/pages/Login.page';
 import VideoPage from './frameworks/ui/pages/Video.page';
 import RegisterPage from './frameworks/ui/pages/Register.page';
+import HomePage from './frameworks/ui/pages/Home.page';
+import VideoInfo from './frameworks/ui/components/videoDetails/VideoInfo';
+import { UserProvider } from './domain/context/userContext.context';
+import { VideoProvider } from './domain/context/videoContext.context';
+import { ChannelPage } from './frameworks/ui/pages/Channel.page';
 
 function App() {
-  const [login, setLogin] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
   return (
     <BrowserRouter>
+    <UserProvider>
+    <VideoProvider>
+
       <div className="app-container">
-        <MyNavbar login={login} />
+        <MyNavbar />
         <Routes>
           <Route
             path="/login"
             element={
-              <LoginPage
-                setEmail={setEmail}
-                setPassword={setPassword}
-                setLogin={setLogin}
-                email={email}
-                password={password}
-              />
+              <LoginPage/>
             }
           />
           <Route
             path="/upload"
             element={
-              <VideoPage
-                email={email}
-              />
+              <VideoPage/>
             }
           />
           <Route
@@ -45,12 +41,31 @@ function App() {
               <RegisterPage/>
             }
           />
+          <Route
+            path="/"
+            element={
+              <HomePage/>
+            }
+          />
+          <Route
+            path="/watch"
+            element={
+              <VideoInfo/>
+            }
+          />
+          <Route
+            path="/channel"
+            element={
+              <ChannelPage/>
+            }
+          />
         </Routes>
         <Sidebar />
-        <div className="content">
-          {/* Otros componentes */}
-        </div>
       </div>
+    </VideoProvider>
+
+
+    </UserProvider>
     </BrowserRouter>
   );
 }

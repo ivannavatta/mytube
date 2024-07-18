@@ -1,27 +1,30 @@
 // MyNavbar.tsx
-import React from 'react';
+import React, { useContext } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
 import { FaVideo } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
+import { UserContext } from '../../../../domain/context/userContext.context';
 
-interface MyNavbarProps {
-  login: boolean;
-}
 
-const MyNavbar: React.FC<MyNavbarProps> = ({ login }) => {
+const MyNavbar: React.FC = () => {
+  const context = useContext(UserContext)
+
+  if(!context) throw new Error('no existe el contexto')
+
+    const { login, email } = context
   return (
-    <Navbar bg="dark" variant="dark" className="navbar">
-      <Navbar.Brand href="/home">MyTube</Navbar.Brand>
+    <Navbar className="navbar">
+     <Link to={'/'}><Navbar.Brand>MyTube</Navbar.Brand></Link> 
       <div className="navbar-right">
-        {login ? (
+        {email !== '' ? (
           <div className="icon-container">
-           <Link to={'upload'}><FaVideo className="video-icon" /></Link> 
+           <Link to={'/upload'}><FaVideo className="video-icon" /></Link> 
             <span className="tooltip-text">Crear</span>
           </div>
         ) : (
           <Button className="login-button" variant="outline-light">
-            <Link to="/login">Log In</Link>
+            <Link to={"/login"}>Log In</Link>
           </Button>
         )}
       </div>

@@ -1,23 +1,14 @@
 // LoginPage.tsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginContainer from '../components/login/LoginContainer';
+import { UserContext } from '../../../domain/context/userContext.context';
 
-interface LoginPageProps {
-  setEmail: React.Dispatch<React.SetStateAction<string>>;
-  setPassword: React.Dispatch<React.SetStateAction<string>>;
-  setLogin: React.Dispatch<React.SetStateAction<boolean>>;
-  email: string;
-  password: string;
-}
+const LoginPage: React.FC = () => {
+  const context = useContext(UserContext)
+  if(!context) throw new Error('no existe el contexto')
 
-const LoginPage: React.FC<LoginPageProps> = ({
-  setEmail,
-  setPassword,
-  setLogin,
-  email,
-  password
-}) => {
+  const { setEmail, setPassword, setLogin, email, password} = context
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
 

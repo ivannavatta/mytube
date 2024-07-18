@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Login } from '../../../../domain/entities/user.entity'
 import UserService from '../../../../external/services/user.service'
 import LoginUserUseCase from '../../../../useCases/loginUser.useCase'
 import LoginDetails from './LoginDetails'
+import { Login } from '../../../../controllers/interfaces/interfaces'
 
 
 interface LoginContainerProps {
@@ -28,7 +28,10 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ setShow, show, setLogin
     
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        const login = new Login(email, password)
+        const login: Login = {
+          email,
+          password
+        }
         const userService = new UserService('http://localhost:3001')
         const loginUseCase = new LoginUserUseCase(userService)
     

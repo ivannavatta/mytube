@@ -21,6 +21,7 @@ interface ReusableFormProps {
     handleFileChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     fields: FormField[];
     showFileField?: boolean;
+    click?:  () => void
     children?: React.ReactNode;
 }
 
@@ -33,6 +34,7 @@ const Modal: React.FC<ReusableFormProps> = ({
     handleFileChange,
     fields,
     showFileField = false,
+    click,
     children
 }) => {
     return (
@@ -76,7 +78,7 @@ const Modal: React.FC<ReusableFormProps> = ({
                         </div>
                     ))}
                     {children}
-                    <button type="submit">{submitButtonLabel}</button>
+                    <button type="submit" onClick={click}>{submitButtonLabel}</button>
                 </form>
             </div>
         </div>
