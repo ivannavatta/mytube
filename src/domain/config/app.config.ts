@@ -1,6 +1,8 @@
 import dotenv from 'dotenv'
 dotenv.config()
 
-export default {
+const config = {
     base_url: process.env.BASE_URL
 }
+
+export default config

@@ -1,8 +1,6 @@
-// LoginPage.tsx
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginContainer from '../components/login/LoginContainer';
-import { UserContext } from '../../../domain/context/userContext.context';
 
 const LoginPage: React.FC = () => {
   

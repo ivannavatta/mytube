@@ -1,5 +1,3 @@
-import { User } from "../domain/entities/user.entity";
-import { Video } from "../domain/entities/video.entity";
 import VideoService from "../external/services/video.service";
 import { CreateVideo } from "./interfaces/video.interface";
 

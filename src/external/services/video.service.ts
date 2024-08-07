@@ -1,5 +1,4 @@
 import { IVideo } from "../../controllers/interfaces/interfaces"
-import { Video } from "../../domain/entities/video.entity"
 
 export default class VideoService {
     private baseUrl: string
@@ -71,6 +70,7 @@ export default class VideoService {
             const data = await res.json()
 
             const video = data.payload
+            console.log("🚀 ~ VideoService ~ create ~ video:", video)
             
         } catch (error) {
             console.log(error);

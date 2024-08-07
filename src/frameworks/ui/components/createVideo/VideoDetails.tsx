@@ -1,5 +1,4 @@
 import React from 'react';
-import PublishIcon from '@mui/icons-material/Publish'
 import Modal, { FormField } from '../Modal/Modal';
 
 interface VideoDetailsProps {

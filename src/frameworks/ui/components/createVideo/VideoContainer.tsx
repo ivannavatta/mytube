@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import { Video } from '../../../../domain/entities/video.entity';
 import VideoService from '../../../../external/services/video.service';
 import CreateVideoUseCase from '../../../../useCases/createVideo.useCase';
 import VideoDetails from './VideoDetails';

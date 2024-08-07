@@ -12,7 +12,7 @@ const MyNavbar: React.FC = () => {
 
   if(!context) throw new Error('no existe el contexto')
 
-    const { login, email, logout } = context
+    const { login, logout } = context
 
     const handleLogout = () => {
       logout()

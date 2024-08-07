@@ -1,6 +1,6 @@
 import { Login } from "../../controllers/interfaces/interfaces"
 import { User } from "../../domain/entities/user.entity"
-import { isValidUser } from "../../shared/utils/validUser.util"
+
 
 export default class UserService {
     private baseUrl: string

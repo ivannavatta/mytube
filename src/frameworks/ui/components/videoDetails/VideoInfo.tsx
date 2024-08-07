@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useParams } from 'react-router-dom';
 import './VideoInfo.css';
 import { VideoContext } from '../../../../domain/context/videoContext.context';
 import config from '../../../../domain/config/app.config'
