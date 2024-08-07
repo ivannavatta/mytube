@@ -4,6 +4,8 @@ import VideoService from '../../../../external/services/video.service';
 import GetVideosUseCase from '../../../../useCases/getVideos.useCase';
 import { IVideo } from '../../../../controllers/interfaces/interfaces';
 import './Home.css'
+import config from '../../../../domain/config/app.config'
+const { base_url } = config
 
 const HomeContainer = () => {
   const [videos, setVideos] = useState<IVideo[]>([]);
@@ -13,7 +15,7 @@ const HomeContainer = () => {
   useEffect(() => {
       const fetchVideos = async () => {
           try {
-            const videoService = new VideoService('http://localhost:3001');
+            const videoService = new VideoService(`${base_url}`);
             const getVideos = new GetVideosUseCase(videoService);
             const videoData = await getVideos.execute();
             console.log("🚀 ~ fetchVideos ~ videoData:", videoData)

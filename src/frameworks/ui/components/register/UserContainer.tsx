@@ -3,7 +3,8 @@ import UserService from '../../../../external/services/user.service';
 import CreateUserUseCase from '../../../../useCases/createUser.useCase';
 import UserDetails from './UserDetails';
 import { User } from '../../../../domain/entities/user.entity';
-
+import config from '../../../../domain/config/app.config'
+const { base_url } = config
 interface UserContainerProps {
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
   show: boolean;
@@ -31,7 +32,7 @@ const UserContainer: React.FC<UserContainerProps> = ({ setShow, show }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const user = new User(name, lastName, email, password);
-    const userService = new UserService('http://localhost:3001');
+    const userService = new UserService(`${base_url}`);
     const createUserUseCase = new CreateUserUseCase(userService);
 
 

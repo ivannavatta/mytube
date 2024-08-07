@@ -4,7 +4,8 @@ import VideoService from '../../../../external/services/video.service';
 import CreateVideoUseCase from '../../../../useCases/createVideo.useCase';
 import VideoDetails from './VideoDetails';
 import { UserContext } from '../../../../domain/context/userContext.context';
-
+import config from '../../../../domain/config/app.config'
+const { base_url } = config
 interface VideoContainterProps {
   setShow: (React.Dispatch<React.SetStateAction<boolean>>),
   show: boolean
@@ -46,7 +47,7 @@ const VideoContainer: React.FC<VideoContainterProps> = ({ setShow, show}) => {
     formData.append('title', title);
     formData.append('isPrivate', privately);
 
-    const videoService = new VideoService('http://localhost:3001');
+    const videoService = new VideoService(`${base_url}`);
     const createVideoUseCase = new CreateVideoUseCase(videoService);
 
 

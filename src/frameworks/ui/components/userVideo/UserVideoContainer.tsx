@@ -4,6 +4,8 @@ import GetUserVideosUseCase from '../../../../useCases/getUserVideos.useCase';
 import { UserContext } from '../../../../domain/context/userContext.context';
 import UserVideoDetails from './UserVideoDetails';
 import { IVideo } from '../../../../controllers/interfaces/interfaces';
+import config from '../../../../domain/config/app.config'
+const { base_url } = config
 
 const UserVideoContainer = () => {
     const [info, setInfo] = useState<IVideo[]>([]);
@@ -21,7 +23,7 @@ const UserVideoContainer = () => {
                 return;
             }
             try {
-                const videoService = new VideoService('http://localhost:3001');
+                const videoService = new VideoService(`${base_url}`);
                 const res = new GetUserVideosUseCase(videoService);
                 const videoData = await res.execute(email);
                 console.log("🚀 ~ fetchVideos ~ videoData:", videoData);

@@ -4,7 +4,8 @@ import LoginUserUseCase from '../../../../useCases/loginUser.useCase'
 import LoginDetails from './LoginDetails'
 import { Login } from '../../../../controllers/interfaces/interfaces'
 import { UserContext } from '../../../../domain/context/userContext.context'
-
+import config from '../../../../domain/config/app.config'
+const { base_url } = config
 
 interface LoginContainerProps {
   setShow: (React.Dispatch<React.SetStateAction<boolean>>)
@@ -33,7 +34,7 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ setShow, show }) => {
           email,
           password
         }
-        const userService = new UserService('http://localhost:3001')
+        const userService = new UserService(`${base_url}`)
         const loginUseCase = new LoginUserUseCase(userService)
     
         try {

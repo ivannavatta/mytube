@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import './VideoInfo.css';
 import { VideoContext } from '../../../../domain/context/videoContext.context';
+import config from '../../../../domain/config/app.config'
+const { base_url } = config
 
 const VideoInfo: React.FC = () => {
     const context = useContext(VideoContext)
@@ -13,7 +15,7 @@ const VideoInfo: React.FC = () => {
     return (
         <div className="video-detail">
             <div className="video-container">
-                <video src={`http://localhost:3001/${url}`} width="100%" controls>
+                <video src={`${base_url}/${url}`} width="100%" controls>
                     Tu navegador no soporta la etiqueta de video.
                 </video>
             </div>
