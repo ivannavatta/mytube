@@ -1,9 +1,8 @@
-import webpack from 'webpack';
-import path from 'path-browserify';
+const webpack = require('webpack');
 
-export default function override(config) {
+module.exports = function override(config) {
   config.resolve.fallback = {
-    path: path,
+    path: require.resolve('path-browserify'),
     fs: false,
     os: false,
     http: false,
@@ -13,5 +12,5 @@ export default function override(config) {
   };
 
   return config;
-}
+};
 
