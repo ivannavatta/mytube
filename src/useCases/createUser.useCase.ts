@@ -17,12 +17,11 @@ export default class CreateUserUseCase implements CreateUser {
             throw new Error("El apellido debe tener al menos 4 caracteres.");
         }
 
-        // Validar la contraseña
+    
         if (user.password.length < 4) {
             throw new Error("La contraseña debe tener al menos 4 caracteres.");
         }
 
-        // Validar el correo electrónico
         const emailRegex = /^[a-zA-Z0-9._%+-]{4,}@(gmail|hotmail)\.com$/;
         if (!emailRegex.test(user.email)) {
             throw new Error("El correo electrónico debe estar completo");

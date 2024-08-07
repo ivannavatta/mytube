@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import HomeDetails from './HomeDetails'
 import VideoService from '../../../../external/services/video.service';
 import GetVideosUseCase from '../../../../useCases/getVideos.useCase';
-import { IVideo, IVideoResponse } from '../../../../controllers/interfaces/interfaces';
+import { IVideo } from '../../../../controllers/interfaces/interfaces';
 import './Home.css'
 
 const HomeContainer = () => {
@@ -36,6 +36,7 @@ const HomeContainer = () => {
   if (error) {
       return <div>{error}</div>;
   }
+  
 
   return (
       <div className="home-details">

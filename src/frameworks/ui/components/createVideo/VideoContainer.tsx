@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Video } from '../../../../domain/entities/video.entity';
 import VideoService from '../../../../external/services/video.service';
 import CreateVideoUseCase from '../../../../useCases/createVideo.useCase';
 import VideoDetails from './VideoDetails';
+import { UserContext } from '../../../../domain/context/userContext.context';
 
 interface VideoContainterProps {
   setShow: (React.Dispatch<React.SetStateAction<boolean>>),
   show: boolean
-  email: string
 }
-const VideoContainer: React.FC<VideoContainterProps> = ({ setShow, show, email}) => {
+const VideoContainer: React.FC<VideoContainterProps> = ({ setShow, show}) => {
+  const context = useContext(UserContext)
+
+  if(!context) throw new Error('no existe el contexto')
+
+  const { email } = context
 
   const [file, setFile] = useState<File | null>(null);
   const [title, setTitle] = useState<string>('');

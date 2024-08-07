@@ -12,15 +12,22 @@ const MyNavbar: React.FC = () => {
 
   if(!context) throw new Error('no existe el contexto')
 
-    const { login, email } = context
+    const { login, email, logout } = context
+
+    const handleLogout = () => {
+      logout()
+    }
   return (
     <Navbar className="navbar">
      <Link to={'/'}><Navbar.Brand>MyTube</Navbar.Brand></Link> 
       <div className="navbar-right">
-        {email !== '' ? (
+        {login ? (
           <div className="icon-container">
            <Link to={'/upload'}><FaVideo className="video-icon" /></Link> 
             <span className="tooltip-text">Crear</span>
+            <Button className="logout-button" variant="outline-light" onClick={handleLogout}>
+              Log Out
+            </Button>
           </div>
         ) : (
           <Button className="login-button" variant="outline-light">

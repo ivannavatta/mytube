@@ -13,6 +13,7 @@ const UserContainer: React.FC<UserContainerProps> = ({ setShow, show }) => {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState<{ [key: string]: string; }>({});
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
@@ -38,7 +39,17 @@ const UserContainer: React.FC<UserContainerProps> = ({ setShow, show }) => {
       await createUserUseCase.execute(user);
       console.log("User registered successfully");
     } catch (error) {
-      console.error("Error registering user", error);
+      if (error instanceof Error) {
+        const errorMessage = error.message;
+        const newErrors: { [key: string]: string } = {};
+        if (errorMessage.includes("nombre")) newErrors.name = errorMessage;
+        if (errorMessage.includes("apellido")) newErrors.lastName = errorMessage;
+        if (errorMessage.includes("contraseña")) newErrors.password = errorMessage;
+        if (errorMessage.includes("correo electrónico")) newErrors.email = errorMessage;
+        setErrors(newErrors);
+      } else {
+        setErrors({ general: "An unknown error occurred" });
+      }
     }
   };
 
@@ -55,6 +66,7 @@ const UserContainer: React.FC<UserContainerProps> = ({ setShow, show }) => {
       lastName={lastName}
       email={email}
       password={password}
+      errors={errors}
     />
   );
 };

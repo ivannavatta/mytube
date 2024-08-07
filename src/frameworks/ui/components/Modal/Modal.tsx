@@ -10,6 +10,7 @@ export interface FormField {
     options?: string[];
     handleChangeInput?: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleChangeSelect?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    error?: string
 }
 
 interface ReusableFormProps {
@@ -74,6 +75,7 @@ const Modal: React.FC<ReusableFormProps> = ({
                                     />
                                 )}
                                 <span className='span'>{field.label}</span>
+                                {field.error && <p className="error-message">{field.error}</p>} {/* Mostrar mensaje de error */}
                             </label>
                         </div>
                     ))}

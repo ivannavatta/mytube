@@ -35,29 +35,11 @@ const UserVideoContainer = () => {
         fetchVideos();
     }, [email]);
 
-    // useEffect(() => {
-    //     const fetchVideos = async () => {
-
-    //         try {
-    //             const videoService = new VideoService('http://localhost:3001');
-    //             const res = new GetUserVideosUseCase(videoService);
-    //             const videoData = await res.execute(email);
-                
-    //             console.log("Videos cargados:", videoData);
-    //             setInfo(videoData);
-    //         } catch (error) {
-    //             setError('Error al cargar los videos');
-    //         }
-    //     };
-
-    //     fetchVideos();
-    // }, [email]);  // Dependencia del useEffect debe ser el email para refrescar los videos cuando cambia el email
-
     return (
         <div className="userVideo-container">
             {error && <p>{error}</p>}
             {
-                email !== '' ? info.length !== 0 ?
+                login ? info.length !== 0 ?
                 (
             <table className="video-table">
                 <thead>

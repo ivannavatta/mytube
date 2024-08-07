@@ -33,4 +33,16 @@
     color: #FFFFFF;
 }
 
+@media (max-width: 768px) {
+    .video-detail {
+      margin-left: 0;
+      padding: 10px;
+      margin-top: 60px; /* Adjust if you have a fixed navbar */
+    }
+  
+    .video-info h1 {
+      font-size: 20px;
+    }
+  }
+
 

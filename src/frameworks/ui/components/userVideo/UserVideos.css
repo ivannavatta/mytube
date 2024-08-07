@@ -37,4 +37,18 @@
     font-size: 22px;
 }
 
+@media (max-width: 768px) {
+    .userVideo-container {
+      margin-left: 0;
+      padding: 10px;
+    }
+  
+    .video-card {
+      margin-bottom: 10px;
+    }
+  
+    .video-info p {
+      font-size: 14px;
+    }
+  }
 

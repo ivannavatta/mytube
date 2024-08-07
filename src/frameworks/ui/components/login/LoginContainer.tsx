@@ -1,21 +1,22 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import UserService from '../../../../external/services/user.service'
 import LoginUserUseCase from '../../../../useCases/loginUser.useCase'
 import LoginDetails from './LoginDetails'
 import { Login } from '../../../../controllers/interfaces/interfaces'
+import { UserContext } from '../../../../domain/context/userContext.context'
 
 
 interface LoginContainerProps {
-  setEmail: React.Dispatch<React.SetStateAction<string>>
-  setPassword: React.Dispatch<React.SetStateAction<string>>
-  setLogin: React.Dispatch<React.SetStateAction<boolean>>
   setShow: (React.Dispatch<React.SetStateAction<boolean>>)
-  email: string
-  password: string
   show: boolean
 }
 
-const LoginContainer: React.FC<LoginContainerProps> = ({ setShow, show, setLogin, setEmail, setPassword, email, password }) => {
+const LoginContainer: React.FC<LoginContainerProps> = ({ setShow, show }) => {
+    const context = useContext(UserContext)
+
+    if(!context) throw new Error('no existe el contexto')
+
+    const { setEmail, setPassword, setLogin, email, password} = context
   
     const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       setEmail(e.target.value)
@@ -39,6 +40,8 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ setShow, show, setLogin
             await loginUseCase.execute(login)
             console.log('log in');
             setLogin(true)
+            localStorage.setItem('email', email);
+            localStorage.setItem('isLoggedIn', 'true');
             
         } catch (error) {
             console.log('falla al logiarse',error);

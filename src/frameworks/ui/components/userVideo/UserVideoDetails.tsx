@@ -28,7 +28,7 @@ const UserVideoDetails: React.FC<UserVideoDetailsProps> = ({ originalName, title
             <td>{title}</td>
             <td>{size}</td>
             <td>{isPrivate ? 'Private' : 'Public'}</td>
-            <Link to={url} onClick={handleChange}><td>{url}</td></Link>
+            <td><Link to={url} onClick={handleChange}>{url}</Link></td>
             
         </tr>
     );

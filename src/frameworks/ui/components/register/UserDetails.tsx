@@ -13,6 +13,7 @@ interface UserDetailsProps {
     lastName: string;
     email: string;
     password: string;
+    errors: { [key: string]: string };
   }
 
 const UserDetails: React.FC<UserDetailsProps> = ({
@@ -26,7 +27,8 @@ const UserDetails: React.FC<UserDetailsProps> = ({
   email,
   password,
   setShow,
-  show
+  show,
+  errors
 }) => {
 
   const handleClose = () => setShow(false)
@@ -40,28 +42,32 @@ const UserDetails: React.FC<UserDetailsProps> = ({
       label: 'Name',
       type: 'text',
       value: name,
-      handleChangeInput: setName
+      handleChangeInput: setName,
+      error: errors.name
     },
     {
       id: 'lastName',
       label: 'LastName',
       type: 'text',
       value: lastName,
-      handleChangeInput: setLastName
+      handleChangeInput: setLastName,
+      error: errors.lastName
     },
     {
       id: 'email',
       label: 'Email',
       type: 'text',
       value: email,
-      handleChangeInput: setEmail
+      handleChangeInput: setEmail,
+      error: errors.email
     },
     {
       id: 'password',
       label: 'Password',
       type: 'password',
       value: password,
-      handleChangeInput: setPassword
+      handleChangeInput: setPassword,
+      error: errors.password
     },
   ]
   return (
