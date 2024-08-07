@@ -9,7 +9,24 @@ export default class CreateUserUseCase implements CreateUser {
     }
 
     async execute(user: User): Promise<void>{
+        if (user.firstName.length < 4) {
+            throw new Error("El nombre debe tener al menos 4 caracteres.");
+        }
+
+        if (user.lastName.length < 4) {
+            throw new Error("El apellido debe tener al menos 4 caracteres.");
+        }
+
+        // Validar la contraseña
+        if (user.password.length < 4) {
+            throw new Error("La contraseña debe tener al menos 4 caracteres.");
+        }
+
+        // Validar el correo electrónico
+        const emailRegex = /^[a-zA-Z0-9._%+-]{4,}@(gmail|hotmail)\.com$/;
+        if (!emailRegex.test(user.email)) {
+            throw new Error("El correo electrónico debe estar completo");
+        }
         return await this.userService.register(user)
-        //agregar logica para validar el formulario, porque aunq mandes todos numeros el formulario se envia y se crea el usario, ya que la info del req.body llega como string
     }
 }
