@@ -6,6 +6,7 @@ import { IVideo } from '../../../../controllers/interfaces/interfaces';
 import './Home.css'
 import config from '../../../../domain/config/app.config'
 const { base_url } = config
+console.log(`Base URL: ${base_url}`); // Verifica el valor de base_url
 
 const HomeContainer = () => {
   const [videos, setVideos] = useState<IVideo[]>([]);
