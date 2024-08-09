@@ -56,7 +56,7 @@ export default class VideoService {
         const fetchParams = {
             url: `${this.baseUrl}/video`,
             headers: {
-                'Content-Type': 'application/json'
+               
             },
             method: 'POST',
             body: video,
