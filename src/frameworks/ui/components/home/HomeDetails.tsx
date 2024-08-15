@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 interface HomeDetailsProps {
   title: string;
   url: string;
-  originalName: string;
+  urlGCS: string;
 }
 
-const HomeDetails: React.FC<HomeDetailsProps> = ({ title, url, originalName }) => {
+const HomeDetails: React.FC<HomeDetailsProps> = ({ title, url, urlGCS }) => {
   const context = useContext(VideoContext);
 
   if (!context) throw new Error('No se encuentra en el contexto');
@@ -18,7 +18,7 @@ const HomeDetails: React.FC<HomeDetailsProps> = ({ title, url, originalName }) =
 
   const handleChange = () => {
     setTitle(title);
-    setUrl(originalName);
+    setUrl(urlGCS);
   };
 
   return (

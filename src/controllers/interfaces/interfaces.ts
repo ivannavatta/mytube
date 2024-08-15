@@ -10,6 +10,7 @@ export interface IVideo {
     size: number
     isPrivate: boolean
     url: string
+    urlGCS: string
 }
 
 export interface IVideoResponse {

@@ -26,7 +26,6 @@ const UserVideoContainer = () => {
                 const videoService = new VideoService(`${base_url}`);
                 const res = new GetUserVideosUseCase(videoService);
                 const videoData = await res.execute(email);
-                console.log("🚀 ~ fetchVideos ~ videoData:", videoData);
 
                 setInfo(videoData);
             } catch (error) {

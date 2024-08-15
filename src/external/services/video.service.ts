@@ -9,12 +9,9 @@ export default class VideoService {
     async getAll(): Promise<IVideo[]> {
         try {
             const url = `${this.baseUrl}/video/public`
-            console.log(`Fetching from URL: ${url}`);
             const res = await fetch(url)
             const data = await res.json()
-
             const response = data.payload as IVideo[]
-            console.log("🚀 ~ VideoService ~ getAll ~ response:", response)
 
             return response
             
@@ -43,7 +40,6 @@ export default class VideoService {
             const data = await res.json()
 
             const info = data.payload as IVideo[]
-            console.log("🚀 ~ VideoService ~ getUserVideos ~ info:", info)
 
             return info
         } catch (error) {
