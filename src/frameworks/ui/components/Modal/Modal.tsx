@@ -24,6 +24,7 @@ interface ReusableFormProps {
     showFileField?: boolean;
     click?:  () => void
     children?: React.ReactNode;
+    loginError?: string
 }
 
 const Modal: React.FC<ReusableFormProps> = ({
@@ -36,11 +37,17 @@ const Modal: React.FC<ReusableFormProps> = ({
     fields,
     showFileField = false,
     click,
+    loginError,
     children
 }) => {
     return (
         <div className="modal-overlay" onClick={handleClose}>
             <div className="modal-content" onClick={e => e.stopPropagation()}>
+            {loginError && (
+                <div className="error-banner">
+                    <p>{loginError}</p>
+                </div>
+            )}
                 <div className="modal-header">
                     <h2>{titleLabel}</h2>
                     <button onClick={handleClose} className="close-button">&times;</button>
@@ -75,7 +82,7 @@ const Modal: React.FC<ReusableFormProps> = ({
                                     />
                                 )}
                                 <span className='span'>{field.label}</span>
-                                {field.error && <p className="error-message">{field.error}</p>} {/* Mostrar mensaje de error */}
+                                {field.error && <p className="error-message">{field.error}</p>}
                             </label>
                         </div>
                     ))}

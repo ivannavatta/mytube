@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Nav } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa'; // Asegúrate de tener react-icons instalado
+import { FaBars } from 'react-icons/fa';
 import './Sidebar.css';
 
 const Sidebar: React.FC = () => {
@@ -21,7 +21,6 @@ const Sidebar: React.FC = () => {
         <Nav className="flex-column">
           <Nav.Link href="/" className={location.pathname === '/' ? 'active' : ''}>Home</Nav.Link>
           <Nav.Link href="/channel" className={location.pathname === '/channel' ? 'active' : ''}>Your Videos</Nav.Link>
-          <Nav.Link href="/subscriptions" className={location.pathname === '/subscriptions' ? 'active' : ''}>Subscriptions</Nav.Link>
         </Nav>
       </div>
     </>

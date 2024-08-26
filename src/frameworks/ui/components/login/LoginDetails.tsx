@@ -11,10 +11,11 @@ interface LoginDetailsProps {
     password: string
     setShow: (React.Dispatch<React.SetStateAction<boolean>>),
     show: boolean
+    error: string
 }
 
 const LoginDetails: React.FC<LoginDetailsProps> = ({
-    handleSubmit, setEmail, setPassword, email, password, setShow, show
+    handleSubmit, setEmail, setPassword, email, password, setShow, show, error
 }) => {
 
   const handleClose = () => setShow(false);
@@ -38,13 +39,12 @@ const LoginDetails: React.FC<LoginDetailsProps> = ({
     }
   ]
 
-  // const handleClick = () =>{
-  //   localStorage.setItem('userEmail', email);
-  // }
   return (
-    <Modal titleLabel='Log in' submitButtonLabel='Log in' handleClose={handleClose} handleSubmit={handleSubmit} fields={fields}>
+    <>
+    <Modal titleLabel='Log in' submitButtonLabel='Log in' handleClose={handleClose} handleSubmit={handleSubmit} fields={fields} loginError={error}>
       You do not have an account? <Link to={'/signup'}>Sign up</Link> 
     </Modal>
+    </>
   )
 }
 

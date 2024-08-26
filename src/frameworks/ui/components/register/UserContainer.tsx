@@ -38,7 +38,6 @@ const UserContainer: React.FC<UserContainerProps> = ({ setShow, show }) => {
 
     try {
       await createUserUseCase.execute(user);
-      console.log("User registered successfully");
     } catch (error) {
       if (error instanceof Error) {
         const errorMessage = error.message;

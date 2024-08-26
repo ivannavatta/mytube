@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import UserService from '../../../../external/services/user.service'
 import LoginUserUseCase from '../../../../useCases/loginUser.useCase'
 import LoginDetails from './LoginDetails'
@@ -13,6 +13,7 @@ interface LoginContainerProps {
 }
 
 const LoginContainer: React.FC<LoginContainerProps> = ({ setShow, show }) => {
+    const [errorMessage, setErrorMessage] = useState('');
     const context = useContext(UserContext)
 
     if(!context) throw new Error('no existe el contexto')
@@ -39,17 +40,18 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ setShow, show }) => {
     
         try {
             await loginUseCase.execute(login)
-            console.log('log in');
             setLogin(true)
             localStorage.setItem('email', email);
             localStorage.setItem('isLoggedIn', 'true');
             
         } catch (error) {
-            console.log('falla al logiarse',error);
+            if(error instanceof Error){
+              setErrorMessage(error.message)
+            }
         }
     }
   return (
-    <LoginDetails handleSubmit={handleSubmit} setEmail={handleEmailChange} setPassword={handlePasswordChange} email={email} password={password} setShow={setShow} show={show}/>
+    <LoginDetails handleSubmit={handleSubmit} setEmail={handleEmailChange} setPassword={handlePasswordChange} email={email} password={password} setShow={setShow} show={show}  error={errorMessage}/>
   )
 }
 

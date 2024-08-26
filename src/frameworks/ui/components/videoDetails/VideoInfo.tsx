@@ -18,7 +18,6 @@ const VideoInfo: React.FC = () => {
             </div>
             <div className="video-info">
                 <h1>{title}</h1>
-                {/* Agrega cualquier otra información del video aquí */}
             </div>
         </div>
     );

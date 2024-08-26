@@ -9,9 +9,10 @@ interface UserVideoDetailsProps {
     size: number;
     isPrivate: boolean;
     url: string;
+    urlGCS: string;
 }
 
-const UserVideoDetails: React.FC<UserVideoDetailsProps> = ({ originalName, title, size, isPrivate, url }) => {
+const UserVideoDetails: React.FC<UserVideoDetailsProps> = ({ originalName, title, size, isPrivate, url, urlGCS}) => {
     const context = useContext(VideoContext);
 
     if (!context) throw new Error('No se encuentra en el contexto');
@@ -20,7 +21,7 @@ const UserVideoDetails: React.FC<UserVideoDetailsProps> = ({ originalName, title
   
     const handleChange = () => {
       setTitle(title);
-      setUrl(originalName);
+      setUrl(urlGCS);
     };
     return (
         <tr>

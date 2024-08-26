@@ -1,4 +1,3 @@
-// MyNavbar.tsx
 import React, { useContext } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
 import { FaVideo } from 'react-icons/fa';

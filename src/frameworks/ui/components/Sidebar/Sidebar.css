@@ -1,4 +1,4 @@
-/* Sidebar.css */
+
 .sidebar {
   position: fixed;
   top: 40px;
@@ -27,7 +27,7 @@
   color: #000;
 }
 
-/* Toggle button */
+
 .sidebar-toggle {
   position: fixed;
   top: 15px;
@@ -37,7 +37,7 @@
   border: none;
   padding: 10px;
   cursor: pointer;
-  z-index: 1000; /* Make sure the button is above other content */
+  z-index: 1000; 
   display: none;
 }
 
@@ -45,7 +45,7 @@
   outline: none;
 }
 
-/* Responsive Styles */
+
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);

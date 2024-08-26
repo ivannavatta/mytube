@@ -60,9 +60,13 @@ export default class UserService {
             });
 
             const data = await res.json();
-
-            if (!res.ok) {
-                throw new Error(data.message || 'Login failed');
+    
+            if (res.ok) {
+                window.location.href = '/';
+            } else if (res.status === 400 && data.message === 'Bad request') {
+                throw new Error('Usario o contraseña incorrectos');
+            } else {
+                throw new Error('Error al intentar inicar sesion');
             }
 
             return data;

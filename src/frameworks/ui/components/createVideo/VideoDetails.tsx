@@ -10,6 +10,7 @@ interface VideoDetailsProps {
     show: boolean;
     title: string;
     privately: string;
+    errors: string;
 }
 
 const VideoDetails: React.FC<VideoDetailsProps> = ({
@@ -20,7 +21,8 @@ const VideoDetails: React.FC<VideoDetailsProps> = ({
     title,
     privately,
     setShow,
-    show
+    show,
+    errors
 }) => {
     const handleClose = () => setShow(false);
 
@@ -32,7 +34,8 @@ const VideoDetails: React.FC<VideoDetailsProps> = ({
         label: 'Title',
         type: 'text',
         value: title,
-        handleChangeInput: handleTileChange
+        handleChangeInput: handleTileChange,
+        error: errors
       },
       {
         id: 'privately',

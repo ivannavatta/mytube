@@ -3,3 +3,14 @@
     color: red;
     margin-left: 2px;
 }
+
+.error-banner {
+    background-color: rgb(255, 102, 102);
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+
+}
+

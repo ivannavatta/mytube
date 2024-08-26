@@ -13,15 +13,16 @@ interface VideoContainterProps {
 }
 const VideoContainer: React.FC<VideoContainterProps> = ({ setShow, show}) => {
   const context = useContext(UserContext)
-
+  
   if(!context) throw new Error('no existe el contexto')
-
-  const { email } = context
-
-  const [file, setFile] = useState<File | null>(null);
-  const [title, setTitle] = useState<string>('');
-  const [privately, setPrivately] = useState<string>('public');
-
+    
+    const { email } = context
+    
+    const [file, setFile] = useState<File | null>(null);
+    const [title, setTitle] = useState<string>('');
+    const [privately, setPrivately] = useState<string>('public');
+    const [errors, setErrors] = useState<string>('');
+    
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       setFile(event.target.files[0]);
@@ -54,13 +55,18 @@ const VideoContainer: React.FC<VideoContainterProps> = ({ setShow, show}) => {
 
     try {
       await createVideoUseCase.execute(formData);
-      console.log("Video created successfully");
     } catch (error) {
       console.error("Error registering user", error);
+      if (error instanceof Error) {
+        setErrors(error.message);
+      }
     }
   }
 
   return (
+    <>
+    
+    <p>errores: {errors}</p>
     <VideoDetails
       handleSubmit={handleSubmit}
       handleFileChange={handleFileChange}
@@ -70,7 +76,9 @@ const VideoContainer: React.FC<VideoContainterProps> = ({ setShow, show}) => {
       privately={privately}
       setShow={setShow}
       show={show}
+      errors={errors}
     />
+    </>
   );
 };
 
