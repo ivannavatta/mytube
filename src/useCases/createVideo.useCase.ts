@@ -8,13 +8,12 @@ export default class CreateVideoUseCase implements CreateVideo {
         this.videoService = videoService
     }
 
-    // async execute(video: Video): Promise<void>{
-    //     return await this.videoService.create(video)
-    //     //agregar logica para validar el formulario, porque aunq mandes todos numeros el formulario se envia y se crea el video, ya que la info del req.body llega como string
-    // }
-
     async execute(video: any): Promise<void>{
+        const title = video.get('title') as string;
+           if (!title || title.length < 4) {
+            throw new Error("El nombre del video es demasiado corto.");
+        }
+
         return await this.videoService.create(video)
-        //agregar logica para validar el formulario, porque aunq mandes todos numeros el formulario se envia y se crea el video, ya que la info del req.body llega como string
     }
 }
