@@ -11,6 +11,8 @@ interface VideoDetailsProps {
     title: string;
     privately: string;
     errors: string;
+    uploading: boolean;
+    fileName?: string;
 }
 
 const VideoDetails: React.FC<VideoDetailsProps> = ({
@@ -22,7 +24,9 @@ const VideoDetails: React.FC<VideoDetailsProps> = ({
     privately,
     setShow,
     show,
-    errors
+    errors,
+    uploading,
+    fileName
 }) => {
     const handleClose = () => setShow(false);
 
@@ -34,8 +38,7 @@ const VideoDetails: React.FC<VideoDetailsProps> = ({
         label: 'Title',
         type: 'text',
         value: title,
-        handleChangeInput: handleTileChange,
-        error: errors
+        handleChangeInput: handleTileChange
       },
       {
         id: 'privately',
@@ -48,7 +51,19 @@ const VideoDetails: React.FC<VideoDetailsProps> = ({
     ]
 
     return (
-      <Modal titleLabel='Create video' fileLabel='Select files' submitButtonLabel='Create' handleClose={handleClose} handleSubmit={handleSubmit} fields={fields} handleFileChange={handleFileChange} showFileField={true}/>
+      <Modal
+        titleLabel='Create video'
+        fileLabel={fileName || 'Select files'}
+        fileAccept='video/mp4,.mp4'
+        submitButtonLabel={uploading ? 'Subiendo…' : 'Create'}
+        submitDisabled={uploading}
+        handleClose={handleClose}
+        handleSubmit={handleSubmit}
+        fields={fields}
+        handleFileChange={handleFileChange}
+        showFileField={true}
+        loginError={errors}
+      />
     );
 };
 

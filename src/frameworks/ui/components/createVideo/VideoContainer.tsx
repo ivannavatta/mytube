@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import VideoService from '../../../../external/services/video.service';
 import CreateVideoUseCase from '../../../../useCases/createVideo.useCase';
 import VideoDetails from './VideoDetails';
@@ -13,16 +14,18 @@ interface VideoContainterProps {
 }
 const VideoContainer: React.FC<VideoContainterProps> = ({ setShow, show}) => {
   const context = useContext(UserContext)
-  
+  const navigate = useNavigate()
+
   if(!context) throw new Error('no existe el contexto')
-    
+
     const { email } = context
-    
+
     const [file, setFile] = useState<File | null>(null);
     const [title, setTitle] = useState<string>('');
     const [privately, setPrivately] = useState<string>('public');
     const [errors, setErrors] = useState<string>('');
-    
+    const [uploading, setUploading] = useState(false);
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
       setFile(event.target.files[0]);
@@ -39,34 +42,30 @@ const VideoContainer: React.FC<VideoContainterProps> = ({ setShow, show}) => {
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (uploading) return;
     if (!file) {
-      alert('Please select a file first!');
+      setErrors('Seleccioná un video .mp4 para subir.');
       return;
     }
-    const formData = new FormData();
-    formData.append('img', file);
-    formData.append('email', email);
-    formData.append('title', title);
-    formData.append('isPrivate', privately);
 
     const videoService = new VideoService(`${base_url}`);
     const createVideoUseCase = new CreateVideoUseCase(videoService);
 
-
+    setErrors('');
+    setUploading(true);
     try {
-      await createVideoUseCase.execute(formData);
+      await createVideoUseCase.execute({ file, email, title, isPrivate: privately });
+      navigate('/');
     } catch (error) {
-      console.error("Error registering user", error);
-      if (error instanceof Error) {
-        setErrors(error.message);
-      }
+      console.error('Error subiendo el video', error);
+      setErrors(error instanceof Error ? error.message : 'Error al subir el video');
+    } finally {
+      setUploading(false);
     }
   }
 
   return (
     <>
-    
-    <p>errores: {errors}</p>
     <VideoDetails
       handleSubmit={handleSubmit}
       handleFileChange={handleFileChange}
@@ -77,6 +76,8 @@ const VideoContainer: React.FC<VideoContainterProps> = ({ setShow, show}) => {
       setShow={setShow}
       show={show}
       errors={errors}
+      uploading={uploading}
+      fileName={file?.name}
     />
     </>
   );

@@ -1,7 +1,6 @@
 import { Login } from "../../controllers/interfaces/interfaces"
 import { User } from "../../domain/entities/user.entity"
-
-const SERVER_DOWN_MESSAGE = 'El servidor no responde, probá de nuevo en unos segundos'
+import { SERVER_DOWN_MESSAGE } from "../../shared/utils/http.util"
 
 export default class UserService {
     private baseUrl: string

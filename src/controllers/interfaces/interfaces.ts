@@ -10,7 +10,14 @@ export interface IVideo {
     size: number
     isPrivate: boolean
     url: string
-    urlGCS: string
+    videoUrl: string
+}
+
+export interface NewVideo {
+    file: File
+    email: string
+    title: string
+    isPrivate: string
 }
 
 export interface IVideoResponse {

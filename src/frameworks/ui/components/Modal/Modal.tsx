@@ -25,6 +25,8 @@ interface ReusableFormProps {
     click?:  () => void
     children?: React.ReactNode;
     loginError?: string
+    submitDisabled?: boolean
+    fileAccept?: string
 }
 
 const Modal: React.FC<ReusableFormProps> = ({
@@ -38,6 +40,8 @@ const Modal: React.FC<ReusableFormProps> = ({
     showFileField = false,
     click,
     loginError,
+    submitDisabled = false,
+    fileAccept,
     children
 }) => {
     return (
@@ -57,7 +61,7 @@ const Modal: React.FC<ReusableFormProps> = ({
                         <div className='divFile'>
                             <div className="divButtonVideos">
                                 <PublishIcon />
-                                <input type="file" id="file" onChange={handleFileChange} className="inputFiled" />
+                                <input type="file" id="file" onChange={handleFileChange} className="inputFiled" accept={fileAccept} />
                                 <label htmlFor="file" className="labelFiled">{fileLabel}</label>
                             </div>
                         </div>
@@ -87,7 +91,7 @@ const Modal: React.FC<ReusableFormProps> = ({
                         </div>
                     ))}
                     {children}
-                    <button type="submit" onClick={click}>{submitButtonLabel}</button>
+                    <button type="submit" onClick={click} disabled={submitDisabled}>{submitButtonLabel}</button>
                 </form>
             </div>
         </div>

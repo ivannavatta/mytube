@@ -1,7 +1,7 @@
-import { IVideo } from "../../controllers/interfaces/interfaces";
+import { IVideo, NewVideo } from "../../controllers/interfaces/interfaces";
 
 export interface CreateVideo {
-    execute(video: any): Promise<void>
+    execute(video: NewVideo): Promise<void>
 }
 
 export interface GetVideos {
