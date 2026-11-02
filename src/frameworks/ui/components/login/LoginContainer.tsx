@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import UserService from '../../../../external/services/user.service'
 import LoginUserUseCase from '../../../../useCases/loginUser.useCase'
 import LoginDetails from './LoginDetails'
@@ -15,6 +16,7 @@ interface LoginContainerProps {
 const LoginContainer: React.FC<LoginContainerProps> = ({ setShow, show }) => {
     const [errorMessage, setErrorMessage] = useState('');
     const context = useContext(UserContext)
+    const navigate = useNavigate()
 
     if(!context) throw new Error('no existe el contexto')
 
@@ -31,6 +33,7 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ setShow, show }) => {
     
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
+        setErrorMessage('')
         const login: Login = {
           email,
           password
@@ -40,10 +43,12 @@ const LoginContainer: React.FC<LoginContainerProps> = ({ setShow, show }) => {
     
         try {
             await loginUseCase.execute(login)
+            // Primero persistimos la sesión, después navegamos
             setLogin(true)
+            setPassword('')
             localStorage.setItem('email', email);
             localStorage.setItem('isLoggedIn', 'true');
-            
+            navigate('/')
         } catch (error) {
             if(error instanceof Error){
               setErrorMessage(error.message)

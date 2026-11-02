@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserService from '../../../../external/services/user.service';
 import CreateUserUseCase from '../../../../useCases/createUser.useCase';
 import UserDetails from './UserDetails';
@@ -15,6 +16,7 @@ const UserContainer: React.FC<UserContainerProps> = ({ setShow, show }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<{ [key: string]: string; }>({});
+  const navigate = useNavigate();
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
@@ -36,16 +38,21 @@ const UserContainer: React.FC<UserContainerProps> = ({ setShow, show }) => {
     const createUserUseCase = new CreateUserUseCase(userService);
 
 
+    setErrors({});
+
     try {
       await createUserUseCase.execute(user);
+      navigate('/login');
     } catch (error) {
       if (error instanceof Error) {
         const errorMessage = error.message;
         const newErrors: { [key: string]: string } = {};
         if (errorMessage.includes("nombre")) newErrors.name = errorMessage;
-        if (errorMessage.includes("apellido")) newErrors.lastName = errorMessage;
-        if (errorMessage.includes("contraseña")) newErrors.password = errorMessage;
-        if (errorMessage.includes("correo electrónico")) newErrors.email = errorMessage;
+        else if (errorMessage.includes("apellido")) newErrors.lastName = errorMessage;
+        else if (errorMessage.includes("contraseña")) newErrors.password = errorMessage;
+        else if (errorMessage.includes("correo electrónico")) newErrors.email = errorMessage;
+        // Errores que no son de un campo (servidor caído, error genérico) van al banner
+        else newErrors.general = errorMessage;
         setErrors(newErrors);
       } else {
         setErrors({ general: "An unknown error occurred" });

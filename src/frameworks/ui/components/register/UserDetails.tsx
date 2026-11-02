@@ -71,7 +71,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({
     },
   ]
   return (
-   <Modal titleLabel='Register' submitButtonLabel='Sign up' handleSubmit={handleSubmit} fields={fields} handleClose={handleClose}/>
+   <Modal titleLabel='Register' submitButtonLabel='Sign up' handleSubmit={handleSubmit} fields={fields} handleClose={handleClose} loginError={errors.general}/>
   )
 }
 
